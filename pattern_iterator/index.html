@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+</body>
+
+<script>
+  // Класс Итератора
+
+  class Iterator {
+    constructor(data) {
+      this.items = data;
+      this.index = 0;
+    }
+
+    // Сброс счетчика
+    reset() {
+      this.index = 0;
+    }
+
+    // Получение первого элемента
+    getFirst() {
+      return this.items.get(this.index);
+    }
+
+    // Получение следующего элемента коллекции
+    getNext() {
+      if (this.hasNext()) {
+        this.index++;
+        return this.items.get(this.index);
+      }
+    }
+
+    // Проверка на следующий элемент
+    hasNext() {
+      return this.items.has(this.index + 1)
+    }
+
+    //Получение элемента, чьё значение равно числу
+    getNumbers() {
+      for (let [key, value] of this.items.entries()) {
+        if (!Number.isInteger(value)) {
+          this.items.delete(key);
+        }
+      }
+      return this.items;
+    }
+  }
+
+  // Создаем коллекцию из 5 элементов
+  let map = new Map([[0, "s"], [1, "ss"], [2, 3], [3, 3.3], [4, "sssss"]])
+  // Создание итератора
+  let iterator = new Iterator(map);
+  // Достаём элементы из Map
+  for (let item = iterator.getFirst(); iterator.hasNext(); item = iterator.getNext()) {
+    console.log(item)
+  }
+  iterator.reset();
+
+  // Выводим все численные значения итератором
+  console.log(iterator.getNumbers());
+
+</script>
