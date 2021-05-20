@@ -3,11 +3,12 @@ class Iterator {
     constructor(data) {
         this.index = -1;
         this.data = data;
-        this.flag = false;
+        this.flag = false; // Флажок для упрощения работы
         this.collectionLength = this.data.length - 1;
         this.collection = this.data;
     }
 
+    // Получение следующего элемента
     getNext() {
         if (this.index < this.collectionLength) {
             this.index++;
@@ -17,6 +18,7 @@ class Iterator {
         }
     }
 
+    // Получение предудыщего элемента
     getPrev() {
         if (this.flag) {
             this.flag = false;
